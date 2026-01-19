@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Banking Interface</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1f2933;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            width: 320px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #111827;
+        }
+
+        label {
+            font-weight: bold;
+            color: #374151;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 1px solid #d1d5db;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            color: white;
+        }
+
+        #b1 {
+            background-color: #2563eb;
+        }
+
+        #b1:hover {
+            background-color: #1d4ed8;
+        }
+
+        #b2 {
+            background-color: #dc2626;
+        }
+
+        #b2:hover {
+            background-color: #b91c1c;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Balance: $<span id="balanceText">0</span></h2>
+
+    <label for="amount">Amount</label><br>
+    <input type="number" id="amount" placeholder="Enter amount"><br><br>
+
+    <div>
+        <button id="b1" onclick="deposit()">Deposit</button>
+        &nbsp;&nbsp;&nbsp;
+        <button id="b2" onclick="withdraw()">Withdraw</button>
+    </div>
+
+    <div class="message" id="msg"></div>
+</div>
+
+<script>
+    let balance = 0;
+
+    function deposit() {
+        let paisa = Number(document.getElementById('amount').value);
+
+        if (paisa <= 0) {
+            document.getElementById('msg').innerText = "Enter a valid amount";
+        } 
+        else {
+            balance += paisa;
+            document.getElementById('balanceText').innerText = balance;
+            document.getElementById('msg').innerText = "Deposit Successful";
+        }
+
+        document.getElementById('amount').value = "";
+    }
+
+    function withdraw() {
+        let paisa = Number(document.getElementById('amount').value);
+
+        if (paisa <= 0) {
+            document.getElementById('msg').innerText = "Enter a valid amount";
+        } 
+        else if (paisa > balance) {
+            document.getElementById('msg').innerText = "Insufficient balance";
+        } 
+        else {
+            balance -= paisa;
+            document.getElementById('balanceText').innerText = balance;
+            document.getElementById('msg').innerText = "Withdraw Successful";
+        }
+
+        document.getElementById('amount').value = "";
+    }
+</script>
+
+</body>
+</html>
