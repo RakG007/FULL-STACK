@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Registration</title>
+
+  <style>
+    /* General Styling */
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    main {
+      display: flex;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    /* Form Card */
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Fields */
+    .field {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: 4px;
+      border: 2px solid #ccc;
+      font-size: 1rem;
+    }
+
+    /* Validation Feedback */
+    input:invalid {
+      border-color: #e53935;
+    }
+
+    input:valid {
+      border-color: #43a047;
+    }
+
+    .error {
+      font-size: 0.85rem;
+      color: #e53935;
+      display: none;
+    }
+
+    input:invalid + .error {
+      display: block;
+    }
+
+    /* Button */
+    button {
+      margin-top: 1.5rem;
+      width: 100%;
+      padding: 0.8rem;
+      background: #1e88e5;
+      color: white;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background: #1565c0;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .card {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <form class="card" novalidate>
+      <h1>Student Registration</h1>
+
+      <!-- Full Name -->
+      <div class="field">
+        <label for="name">Full Name:</label>
+        <input
+          type="text"
+          id="name"
+          placeholder="Enter full name"
+          required
+          pattern="[A-Za-z ]{9,50}">
+        <span class="error">Must contain 9–50 letters</span>
+      </div>
+
+      <!-- Email -->
+      <div class="field">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="example@email.com"
+          required>
+        <span class="error">Valid email required</span>
+      </div>
+
+      <!-- Age -->
+      <div class="field">
+        <label for="age">Age:</label>
+        <input
+          type="number"
+          id="age"
+          min="16"
+          max="30"
+          required>
+        <span class="error">Age 16–30 only</span>
+      </div>
+
+      <button type="submit">Register</button>
+    </form>
+  </main>
+</body>
+</html>
+
