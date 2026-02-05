@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Experiment 1.2.1</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            margin: 0 0 30px 0;
+            color: #2d3748;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        textarea {
+            width: 100%;
+            height: 160px;
+            resize: none;
+            padding: 16px;
+            font-size: 15px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border-radius: 10px;
+            border: 2px solid #e2e8f0;
+            outline: none;
+            transition: all 0.3s ease;
+            background-color: #f8fafc;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+
+        textarea::placeholder {
+            color: #cbd5e0;
+            font-size: 14px;
+        }
+
+        textarea:hover {
+            border-color: #cbd5e0;
+            background-color: #ffffff;
+        }
+
+        textarea:focus {
+            border-color: #667eea;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        p {
+            margin-top: 24px;
+            margin-bottom: 0;
+            font-size: 15px;
+            color: #718096;
+            text-align: right;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        span {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 18px;
+            transition: color 0.2s ease;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 24px;
+                margin-bottom: 25px;
+            }
+
+            textarea {
+                height: 140px;
+                font-size: 14px;
+            }
+
+            p {
+                font-size: 14px;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Live Character Counter</h1>
+
+        <textarea id="ta"  placeholder="Start typing..."></textarea>
+
+        <p>Total Characters: <span id="rg">0</span></p>
+    </div>
+
+    <script>
+        let ta = document.getElementById("ta");
+        ta.addEventListener("input", function() {
+            let count = ta.value.length;
+            document.getElementById("rg").innerText = count;
+        });
+            
+    </script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SVG Drawing Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        svg {
+            border: 2px dashed #aaa;
+            width: 80vw;
+            height: 60vh;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 8px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .top-bar {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#undoBtn {
+    background-color: #1e5bff;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#undoBtn:hover {
+    background-color: #0f47d6;
+}
+    </style>
+</head>
+<body>
+
+    <h2>SVG Drawing Tool</h2>
+    <div class="top-bar">
+    <button id="undoBtn" onclick="undo()">Undo</button>
+</div>
+
+    <svg id="svgCanvas"></svg>
+
+    <p>Circles drawn: <span id="count">0</span></p>
+
+    <script>
+        const svg = document.getElementById("svgCanvas");
+        const countText = document.getElementById("count");
+        let count = 0;
+
+        // Draw circle on mouse click
+        svg.addEventListener("click", function (event) {
+            const rect = svg.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            const circle = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "circle"
+            );
+
+            circle.setAttribute("cx", x);
+            circle.setAttribute("cy", y);
+            circle.setAttribute("r", 6);
+            circle.setAttribute("fill", "blue");
+
+            svg.appendChild(circle);
+            count++;
+            countText.textContent = count;
+        });
+
+        // Undo last circle
+        function undo() {
+            if (svg.lastChild) {
+                svg.removeChild(svg.lastChild);
+                count--;
+                countText.textContent = count;
+            }
+        }
+    </script>
+
+</body>
+</html>
