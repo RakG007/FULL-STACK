@@ -1,123 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Experiment Portfolio</title>
-    <style>
-        :root {
-            --primary: #667eea;
-            --secondary: #764ba2;
-            --dark: #2d3748;
-            --light: #f8fafc;
-        }
-
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: var(--dark);
-            min-height: 100vh;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
-        }
-
-        header {
-            text-align: center;
-            color: white;
-            margin-bottom: 50px;
-        }
-
-        h1 { font-size: 2.5rem; margin-bottom: 10px; }
-        p { opacity: 0.9; }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1100px;
-            width: 100%;
-        }
-
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            text-decoration: none;
-            color: inherit;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .card h2 {
-            color: var(--secondary);
-            margin-top: 0;
-        }
-
-        .card p {
-            color: #666;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 1.8rem; }
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <h1>Web Development Labs</h1>
-        <p>A collection of interactive JavaScript & CSS experiments</p>
-    </header>
-
-    <main class="grid">
-        <a href="EXP_1_2_1.html" class="card">
-            <div>
-                <h2>Live Character Counter</h2>
-                <p>A real-time text analysis tool that tracks character input dynamically using JavaScript event listeners.</p>
-            </div>
-            <div class="btn">View Experiment 1.2.1</div>
-        </a>
-
-        <a href="exp1_2_2.html" class="card">
-            <div>
-                <h2>Dynamic Product Filter</h2>
-                <p>An e-commerce style interface featuring category filtering and responsive CSS grid layouts.</p>
-            </div>
-            <div class="btn">View Experiment 1.2.2</div>
-        </a>
-
-        <a href="exp1_2_3.html" class="card">
-            <div>
-                <h2>SVG Drawing Tool</h2>
-                <p>An interactive canvas application utilizing SVG elements to draw, track, and undo shapes.</p>
-            </div>
-            <div class="btn">View Experiment 1.2.3</div>
-        </a>
-    </main>
-
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
