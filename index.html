@@ -1,13 +1,235 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Node Lab - Interactive Experiments</title>
+  <style>
+    body { font-family: Arial; background:#f4f6f8; margin:0; }
+    header { background:#111; color:white; padding:20px; text-align:center; }
+    section {
+      background:white;
+      max-width:900px;
+      margin:30px auto;
+      padding:20px;
+      border-radius:10px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    }
+    input, select, button { padding:8px; margin:5px; }
+    button {
+      background:#0066cc;
+      color:white;
+      border:none;
+      border-radius:5px;
+      cursor:pointer;
+    }
+    button:hover { background:#004c99; }
+    .card-box, .employee-box {
+      background:#f1f1f1;
+      padding:8px;
+      margin:8px 0;
+      border-radius:6px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Node.js Lab Experiments</h1>
+</header>
+
+<!-- ================= EMPLOYEE ================= -->
+
+<section>
+  <h2>Employee Management</h2>
+  <input id="empName" placeholder="Name">
+  <input id="empDept" placeholder="Department">
+  <input id="empSalary" type="number" placeholder="Salary">
+  <button onclick="addEmployee()">Add</button>
+  <div id="employeeList"></div>
+</section>
+
+<!-- ================= CARD SYSTEM ================= -->
+
+<section>
+  <h2>Playing Card Collection</h2>
+
+  <select id="cardSuit">
+    <option value="">Select Suit</option>
+    <option>Hearts</option>
+    <option>Diamonds</option>
+    <option>Clubs</option>
+    <option>Spades</option>
+  </select>
+
+  <select id="cardValue">
+    <option value="">Select Value</option>
+    <option>Ace</option><option>2</option><option>3</option>
+    <option>4</option><option>5</option><option>6</option>
+    <option>7</option><option>8</option><option>9</option>
+    <option>10</option><option>Jack</option>
+    <option>Queen</option><option>King</option>
+  </select>
+
+  <button onclick="addCard()">Add Card</button>
+  <div id="cardList"></div>
+</section>
+
+<!-- ================= TICKET BOOKING ================= -->
+
+<section>
+  <h2>Ticket Booking</h2>
+
+  <select id="seatSelect">
+    <option value="">Select Seat</option>
+    <option>A1</option><option>A2</option>
+    <option>A3</option><option>A4</option>
+    <option>A5</option>
+  </select>
+
+  <button onclick="bookSeat()">Book</button>
+  <div id="seatStatus"></div>
+</section>
+
+<script>
+
+/* ================= EMPLOYEE ================= */
+
+let employees = JSON.parse(localStorage.getItem("employees")) || [];
+
+function saveEmployees(){
+  localStorage.setItem("employees", JSON.stringify(employees));
+}
+
+function addEmployee(){
+  const name = empName.value.trim();
+  const dept = empDept.value.trim();
+  const salary = empSalary.value;
+
+  if(!name || !dept || salary<=0){
+    alert("Enter valid details");
+    return;
+  }
+
+  employees.push({
+    id: Date.now(),
+    name,
+    department: dept,
+    salary:Number(salary)
+  });
+
+  saveEmployees();
+  renderEmployees();
+
+  empName.value="";
+  empDept.value="";
+  empSalary.value="";
+}
+
+function deleteEmployee(id){
+  employees = employees.filter(e=>e.id!==id);
+  saveEmployees();
+  renderEmployees();
+}
+
+function renderEmployees(){
+  employeeList.innerHTML="";
+  employees.forEach(e=>{
+    employeeList.innerHTML+=`
+      <div class="employee-box">
+        ${e.name} | ${e.department} | ₹${e.salary}
+        <button onclick="deleteEmployee(${e.id})">Delete</button>
+      </div>
+    `;
+  });
+}
+renderEmployees();
+
+/* ================= CARDS ================= */
+
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+
+function saveCards(){
+  localStorage.setItem("cards", JSON.stringify(cards));
+}
+
+function addCard(){
+  const suit = cardSuit.value;
+  const value = cardValue.value;
+
+  if(!suit || !value){
+    alert("Select suit and value");
+    return;
+  }
+
+  const exists = cards.find(c=>c.suit===suit && c.value===value);
+  if(exists){
+    alert("Card already exists");
+    return;
+  }
+
+  cards.push({ id:Date.now(), suit, value });
+  saveCards();
+  renderCards();
+}
+
+function deleteCard(id){
+  cards = cards.filter(c=>c.id!==id);
+  saveCards();
+  renderCards();
+}
+
+function renderCards(){
+  cardList.innerHTML="";
+  cards.forEach(c=>{
+    cardList.innerHTML+=`
+      <div class="card-box">
+        ${c.value} of ${c.suit}
+        <button onclick="deleteCard(${c.id})">Delete</button>
+      </div>
+    `;
+  });
+}
+renderCards();
+
+/* ================= TICKET BOOKING ================= */
+
+let seats = JSON.parse(localStorage.getItem("seats")) || {
+  A1:"Available",
+  A2:"Available",
+  A3:"Available",
+  A4:"Available",
+  A5:"Available"
+};
+
+function saveSeats(){
+  localStorage.setItem("seats", JSON.stringify(seats));
+}
+
+function bookSeat(){
+  const seat = seatSelect.value;
+  if(!seat){
+    alert("Select a seat");
+    return;
+  }
+
+  if(seats[seat]==="Booked"){
+    alert("Seat already booked");
+    return;
+  }
+
+  seats[seat]="Booked";
+  saveSeats();
+  renderSeats();
+}
+
+function renderSeats(){
+  seatStatus.innerHTML="";
+  for(let s in seats){
+    seatStatus.innerHTML+=`${s} : ${seats[s]}<br>`;
+  }
+}
+renderSeats();
+
+</script>
+
+</body>
 </html>
